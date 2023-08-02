@@ -14,7 +14,7 @@ IMAGE_NAME="ros:noetic-ros-base"
 CONTAINER_NAME="ros_container_$(date +%s)"
 
 # Get the current directory path
-CURRENT_DIR=$(pwd)
+CURRENT_DIR=$(pwd)/..
 
 # Get the UID and GID of the host user
 HOST_UID=$(id -u)
@@ -23,12 +23,19 @@ HOST_GID=$(id -g)
 # # Create the "ws" directory if it doesn't exist
 # mkdir -p "${CURRENT_DIR}/ws"
 
+# --env="DISPLAY" \
+# -u "${HOST_UID}:${HOST_GID}" \
 # Run the Docker container
 docker run -itd \
     --name "${CONTAINER_NAME}" \
     --network host \
-    -u "${HOST_UID}:${HOST_GID}" \
+    -u "root:${HOST_UID}" \
     -v "${CURRENT_DIR}:/ws" \
+    --volume="/etc/group:/etc/group:ro" \
+    --volume="/etc/passwd:/etc/passwd:ro" \
+    --volume="/etc/shadow:/etc/shadow:ro" \
+    --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     "${IMAGE_NAME}"
 
 # Print container information
