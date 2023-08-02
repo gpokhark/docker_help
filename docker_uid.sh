@@ -10,7 +10,8 @@ fi
 IMAGE_NAME="ros:noetic-ros-base"
 
 # Create a unique container name
-CONTAINER_NAME="${IMAGE_NAME}_container_$(date +%s)"
+# CONTAINER_NAME="${IMAGE_NAME}_container_$(date +%s)"
+CONTAINER_NAME="ros_container_$(date +%s)"
 
 # Get the current directory path
 CURRENT_DIR=$(pwd)
