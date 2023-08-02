@@ -24,7 +24,7 @@ HOST_GID=$(id -g)
 # mkdir -p "${CURRENT_DIR}/ws"
 
 # Run the Docker container
-docker run -d \
+docker run -itd \
     --name "${CONTAINER_NAME}" \
     --network host \
     -u "${HOST_UID}:${HOST_GID}" \
