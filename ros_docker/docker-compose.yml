@@ -1,0 +1,7 @@
+services:
+  my_ros_container:
+    image: ros_noetic:latest  # Replace with the name of your custom image
+    network_mode: host
+    volumes:
+      - /home/donkeyros/github:/ws
+    # Optionally, you can add other necessary configurations for your ROS setup
